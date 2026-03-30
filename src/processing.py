@@ -1,4 +1,7 @@
-def filter_by_state(input_list: list, current_state: str = "EXECUTED") -> list:
+from typing import Dict, List
+
+
+def filter_by_state(input_list: List[Dict], current_state: str = "EXECUTED") -> List[Dict]:
     """Возвращает новый список словарей, содержащий только те словари, у которых ключ
     state соответствует указанному значению. По умолчанию 'EXECUTED'"""
     output_list = []
@@ -9,6 +12,6 @@ def filter_by_state(input_list: list, current_state: str = "EXECUTED") -> list:
     return output_list
 
 
-def sort_by_date(input_list: list, descending: bool = True) -> list:
+def sort_by_date(input_list: List[Dict], descending: bool = True) -> List[Dict]:
     """Возвращает новый список, отсортированный по дате"""
-    return sorted(input_list, key=lambda x: x['date'], reverse=descending)
+    return sorted(input_list, key=lambda x: x["date"], reverse=descending)
