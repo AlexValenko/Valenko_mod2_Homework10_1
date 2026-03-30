@@ -9,6 +9,6 @@ def filter_by_state(input_list: list, current_state: str = "EXECUTED") -> list:
     return output_list
 
 
-def sort_by_date():
+def sort_by_date(input_list: list, descending: bool = True) -> list:
     """Возвращает новый список, отсортированный по дате"""
-    pass
+    return sorted(input_list, key=lambda x: x['date'], reverse=descending)
