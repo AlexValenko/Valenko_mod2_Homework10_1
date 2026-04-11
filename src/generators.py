@@ -114,5 +114,16 @@ descriptions = transaction_descriptions(transactions)
 for _ in range(5):
     print(next(descriptions))
 
-def card_number_generator():
-    pass
+def card_number_generator(start_card_num = 1, end_card_num = 9999999999999999):
+    if 1 <= start_card_num <= end_card_num <= 9999999999999999:
+        num = start_card_num
+        while num <= end_card_num:
+            string_num = str(num).zfill(16)
+            yield string_num[:4] + " " + string_num[4:8] + " " + string_num[8:12] + " " + string_num[12:]
+            num += 1
+    else:
+        yield "Incorrect diapason"
+
+# Пример использования функции card_number_generator
+for card_number in card_number_generator(-1, 10):
+    print(card_number)
