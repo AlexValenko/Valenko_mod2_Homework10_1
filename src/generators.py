@@ -92,12 +92,12 @@ def filter_by_currency(transactions_data, currency):
 
 
 # Пример использования функции filter_by_currency
-# usd_transactions = filter_by_currency(transactions, "USD")
-# for _ in range(6):
-#     try:
-#         print(next(usd_transactions))
-#     except StopIteration:
-#         print("No data available")
+usd_transactions = filter_by_currency(transactions, "USD")
+for _ in range(6):
+    try:
+        print(next(usd_transactions))
+    except StopIteration:
+        print("No data available")
 
 def transaction_descriptions(transactions_data):
     """Принимает список транзакций и возвращает описание каждой операции по очереди"""
