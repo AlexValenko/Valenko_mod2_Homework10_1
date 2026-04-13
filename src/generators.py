@@ -7,26 +7,26 @@ def filter_by_currency(transactions_data: list[dict], currency: str) -> Generato
     где валюта операции соответствует заданной"""
     if not transactions_data:
         yield []
-    if not any(x["operationAmount"]["currency"]["code"] == currency for x in transactions_data):
-        yield "No transactions"
     try:
-        yield from filter(lambda x: x["operationAmount"]["currency"]["code"] == currency, transactions_data)
+        if not any(x["operationAmount"]["currency"]["code"] == currency for x in transactions_data):
+            yield "No transactions"
     except KeyError:
         yield "key not found"
+    yield from filter(lambda x: x["operationAmount"]["currency"]["code"] == currency, transactions_data)
 
 
 def transaction_descriptions(transactions_data: list[dict]) -> Generator:
     """Принимает список транзакций и возвращает описание каждой операции по очереди"""
     if not transactions_data:
         yield []
-    if not any(x["description"] for x in transactions_data):
-        yield "No transactions"
+    try:
+        if not any(x["description"] for x in transactions_data):
+            yield "No transactions"
+    except KeyError:
+        yield "key description not found"
     else:
         for i in transactions_data:
-            try:
-                yield i["description"]
-            except KeyError:
-                yield "key description not found"
+            yield i["description"]
 
 
 def card_number_generator(start_card_num: int = 1, end_card_num: int = 9999999999999999) -> Generator:
