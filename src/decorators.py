@@ -1,4 +1,3 @@
-import os.path
 import time
 from functools import wraps
 from typing import Any, Callable
@@ -21,11 +20,11 @@ def log(filename: str | None = None) -> Callable:
                     f"started at {formatted_time} "
                     f"inputs: {args}, {kwargs}, "
                     f"result: {result}, "
-                    f"work_time = {stop_time - start_time:.3f} sec \n"
+                    f"work_time = {stop_time - start_time:.7f} sec"
                 )
                 if not filename:
                     # Вывод в консоль значительно упрощен для возможности тестирования
-                    print(f'{function.__name__} OK')
+                    print(f"{function.__name__} OK")
                 else:
                     with open(filename, "a", encoding="utf-8") as f:
                         f.write(log_message + "\n")
@@ -42,15 +41,3 @@ def log(filename: str | None = None) -> Callable:
         return wrapper
 
     return decorator
-
-#
-# # Путь к файлу с логами
-# log_file_path = os.path.join(os.path.join(os.path.dirname(os.getcwd()), "logs"), "my_log.txt")
-#
-#
-# @log()
-# def my_function(x: int, y: int) -> int:
-#     return x + y
-#
-#
-# print(my_function("a", 3))
