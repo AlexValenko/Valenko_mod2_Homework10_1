@@ -1,6 +1,6 @@
 # Всегда использовать LF для JSON, Python, текстовых файлов
 *.json text eol=lf
-*.py text eol=lf
+
 *.txt text eol=lf
 
 # Всегда использовать CRLF для Windows‑скриптов
