@@ -1,0 +1,11 @@
+# Всегда использовать LF для JSON, Python, текстовых файлов
+*.json text eol=lf
+*.py text eol=lf
+*.txt text eol=lf
+
+# Всегда использовать CRLF для Windows‑скриптов
+*.bat text eol=crlf
+
+# Бинарные файлы — не трогать
+*.png binary
+*.jpg binary
