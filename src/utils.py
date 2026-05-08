@@ -1,7 +1,8 @@
 import json
+from typing import Union
 
 
-def get_fin_transactions(path_json: str) -> list[dict[str | dict[str]]]:
+def get_fin_transactions(path_json: str) -> Union[list[dict[str, str | dict[str, str]]], list]:
     """Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях.
     Если файл пустой, содержит не список или не найден, функция возвращает пустой список."""
     try:

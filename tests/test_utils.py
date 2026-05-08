@@ -1,5 +1,6 @@
-from src.utils import get_fin_transactions
 import pytest
+
+from src.utils import get_fin_transactions
 
 """
 Для тестирования работы функции get_fin_transactions используются файлы .json из директории tests/tests_data
