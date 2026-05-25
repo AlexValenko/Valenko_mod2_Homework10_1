@@ -39,7 +39,7 @@ def first_transactions() -> list:
     ]
 
 
-def test_get_transaction_from_csv_normal(first_transactions:list) -> None:
+def test_get_transaction_from_csv_normal(first_transactions: list) -> None:
     """Пример нормальной работы функции get_transaction_from_csv с тестовым файлом tests_data/transactions_test.csv"""
     result = get_transaction_from_csv(path_csv="tests/tests_data/transactions_test.csv")
     assert result == first_transactions
@@ -70,7 +70,7 @@ def test_get_transaction_from_csv_decode_error(capsys: pytest.CaptureFixture[str
     assert captured.out == "Invalid file\n"
 
 
-def test_get_transaction_from_excel_normal(first_transactions:list) -> None:
+def test_get_transaction_from_excel_normal(first_transactions: list) -> None:
     """Пример нормальной работы функции get_transaction_from_excel
     с тестовым файлом tests_data/transactions_test_excel.xlsx"""
     result = get_transaction_from_excel(path_xlsx="tests/tests_data/transactions_test_excel.xlsx")

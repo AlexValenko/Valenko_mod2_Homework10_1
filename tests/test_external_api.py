@@ -43,13 +43,13 @@ def get_standard_response() -> dict:
     }
 
 
-def test_get_amount_transaction_rub_valuta_rub(normal_transaction_rub:dict) -> None:
+def test_get_amount_transaction_rub_valuta_rub(normal_transaction_rub: dict) -> None:
     """Тест работы функции get_amount_transaction_rub с рублевой транзакцией на входе"""
     assert get_amount_transaction_rub(normal_transaction_rub) == 31957.58
 
 
 @patch("src.external_api.get_amount_rub")
-def test_get_amount_transaction_rub_valuta_usd(mock_rub:Mock, normal_transaction_usd:dict) -> None:
+def test_get_amount_transaction_rub_valuta_usd(mock_rub: Mock, normal_transaction_usd: dict) -> None:
     """Тест работы функции get_amount_transaction_rub с валютной транзакцией на входе
     Результат работы функции get_amount_rub, которая обращается по api подменен на 100,00"""
     mock_rub.return_value = 100.00
@@ -59,7 +59,7 @@ def test_get_amount_transaction_rub_valuta_usd(mock_rub:Mock, normal_transaction
 
 @patch("src.external_api.get_amount_rub")
 def test_get_amount_transaction_rub_none_api_request(
-    mock_rub:Mock, normal_transaction_usd:dict, capsys: pytest.CaptureFixture[str]
+    mock_rub: Mock, normal_transaction_usd: dict, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """Тест работы функции get_amount_transaction_rub с валютной транзакцией на входе
     Функция get_amount_rub, которая обращается по api подменен вернула None (выполнена неудачно)"""
@@ -71,7 +71,7 @@ def test_get_amount_transaction_rub_none_api_request(
 
 
 @patch("src.external_api.requests.get")
-def test_get_amount_rub(mock_get:Mock, get_standard_response:dict) -> None:
+def test_get_amount_rub(mock_get: Mock, get_standard_response: dict) -> None:
     """Тест работы функции get_amount_rub с исходными данными 200 USD.
     В качестве api ответа используется фикстура get_standard_response"""
     mock_get.return_value.json.return_value = get_standard_response
@@ -80,7 +80,7 @@ def test_get_amount_rub(mock_get:Mock, get_standard_response:dict) -> None:
 
 
 @patch("src.external_api.requests.get")
-def test_get_amount_rub_return_none(mock_get:Mock, get_standard_response:dict) -> None:
+def test_get_amount_rub_return_none(mock_get: Mock, get_standard_response: dict) -> None:
     """Тест работы функции get_amount_rub с исходными данными 200 USD.
     Проверка работы, в случае, если статус-код не равен 200"""
     mock_get.return_value.json.return_value = get_standard_response
@@ -89,7 +89,7 @@ def test_get_amount_rub_return_none(mock_get:Mock, get_standard_response:dict) -
 
 
 @patch("src.external_api.requests.get")
-def test_get_amount_rub_exception_error(mock_get:Mock, capsys: pytest.CaptureFixture[str]) -> None:
+def test_get_amount_rub_exception_error(mock_get: Mock, capsys: pytest.CaptureFixture[str]) -> None:
     """Тест работы функции get_amount_rub с выбросом исключения RequestException"""
     mock_get.side_effect = RequestException("Ошибка запроса")
 
@@ -100,7 +100,7 @@ def test_get_amount_rub_exception_error(mock_get:Mock, capsys: pytest.CaptureFix
 
 
 @patch("src.external_api.requests.get")
-def test_get_amount_rub_connection_error(mock_get:Mock, capsys: pytest.CaptureFixture[str]) -> None:
+def test_get_amount_rub_connection_error(mock_get: Mock, capsys: pytest.CaptureFixture[str]) -> None:
     """Тест работы функции get_amount_rub с выбросом исключения RequestException"""
     mock_get.side_effect = ConnectionError("Ошибка соединения")
 
