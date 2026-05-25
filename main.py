@@ -20,10 +20,10 @@ if __name__ == "__main__":
     # get_mask_account(0)
 
     #Тестовый запуск чтения транзакций из файла csv
-    csv_transactions = get_transaction_from_csv('data/transactions.csv')
-    print(csv_transactions[0])
+    csv_transactions = get_transaction_from_csv('tests/tests_data/transactions_test.csv')
 
-    excel_transactions = get_transaction_from_excel('data/transactions_excel.xlsx')
+
+    excel_transactions = get_transaction_from_excel('tests/tests_data/transactions_test_excel.xlsx')
     print(excel_transactions[0])
 
 

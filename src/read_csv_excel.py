@@ -12,18 +12,37 @@ def get_transaction_from_csv(path_csv: str) -> list:
                 transactions_data.append(row)
     except FileNotFoundError:
         return []
-    # Вызываем функцию приведения обычного словаря к вложенной структуре по примеру файла operations.json
-    standard_transactions_data = get_standard_transactions(transactions_data)
+
+    # Проверяем, что ключи словаря содержат нужные ключи, иначе - пустой список
+    keys_dict = set(transactions_data[0].keys())
+    normal_keys = {'id', 'state', 'date', 'amount', 'currency_name', 'currency_code', 'from', 'to', 'description'}
+    if normal_keys.issubset(keys_dict):
+        # Вызываем функцию приведения обычного словаря к вложенной структуре по примеру файла operations.json
+        standard_transactions_data = get_standard_transactions(transactions_data)
+    else:
+        print("Invalid file")
+        return []
+
     return standard_transactions_data
 
 def get_transaction_from_excel(path_xlsx: str) -> list:
     """Функция для считывания финансовых операций из файла Excel, принимает путь к файлу CSV в качестве аргумента.
     Возвращает список словарей с транзакциями в приведенном виде."""
-    transaction_df = pd.read_excel(path_xlsx, dtype=str) # Преобразует данные всех полей Excel файла в строки
-    transaction_from_excel = transaction_df.to_dict(orient='records')
-    # Вызываем функцию приведения обычного словаря к вложенной структуре по примеру файла operations.json
-    standard_transactions_data = get_standard_transactions(transaction_from_excel)
-    return standard_transactions_data
+    try:
+        transaction_df = pd.read_excel(path_xlsx, dtype=str) # Преобразует данные всех полей Excel файла в строки
+        transaction_from_excel = transaction_df.to_dict(orient='records')
+    except FileNotFoundError:
+        print("File not found")
+        return []
+    keys_dict = set(transaction_from_excel[0].keys())
+    normal_keys = {'id', 'state', 'date', 'amount', 'currency_name', 'currency_code', 'from', 'to', 'description'}
+    if normal_keys.issubset(keys_dict):
+        # Вызываем функцию приведения обычного словаря к вложенной структуре по примеру файла operations.json
+        standard_transactions_data = get_standard_transactions(transaction_from_excel)
+        return standard_transactions_data
+    else:
+        print("Invalid file")
+        return []
 
 def get_standard_transactions(transactions_data: list) -> list:
     """Функция принимает на вход список словарей с транзакциями и возвращает список словарей с транзакциями
